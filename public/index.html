@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Party</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+      <h1>Watch Party</h1>
+      <div class="form-group">
+        <label for="drive-url">Google Drive Video URL:</label>
+        <input type="text" id="drive-url" placeholder="https://drive.google.com/...">
+      </div>
+      <button id="create-room-btn" class="btn">Create Room</button>
+      
+      <div class="divider">OR</div>
+      
+      <div class="form-group">
+        <label for="room-id">Room ID:</label>
+        <input type="text" id="room-id" placeholder="Enter room ID">
+      </div>
+      <div class="form-group">
+        <label for="room-pin">4-digit PIN:</label>
+        <input type="password" id="room-pin" placeholder="Enter PIN" maxlength="4">
+      </div>
+      <div class="form-group">
+        <label for="username">Your Name:</label>
+        <input type="text" id="username" placeholder="Enter your name">
+      </div>
+      <button id="join-room-btn" class="btn">Join Room</button>
+    </div>
+    
+    <!-- Room Screen -->
+    <div id="room-screen" class="screen">
+      <div class="room-header">
+        <h2>Room: <span id="display-room-id"></span></h2>
+        <div class="room-controls">
+          <button id="leave-room-btn" class="btn btn-danger">Leave Room</button>
+        </div>
+      </div>
+      
+      <div class="room-content">
+        <div class="video-section">
+          <div class="video-container">
+            <video id="video" controls>
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-controls" id="admin-controls">
+            <button id="play-btn" class="btn" disabled><i class="fas fa-play"></i></button>
+            <button id="pause-btn" class="btn" disabled><i class="fas fa-pause"></i></button>
+          </div>
+          
+          <!-- Call Controls -->
+          <div class="call-controls">
+            <button id="start-call-btn" class="btn"><i class="fas fa-video"></i> Start Call</button>
+            <button id="end-call-btn" class="btn" disabled><i class="fas fa-phone-slash"></i> End Call</button>
+            <button id="mute-btn" class="btn"><i class="fas fa-microphone"></i> Mute</button>
+            <button id="video-toggle-btn" class="btn"><i class="fas fa-video"></i> Video Off</button>
+            <div id="call-status">Call inactive</div>
+          </div>
+        </div>
+        
+        <div class="sidebar">
+          <div class="users-section">
+            <h3>Users (<span id="user-count">0</span>)</h3>
+            <div id="users-list" class="users-list"></div>
+          </div>
+          
+          <div class="chat-section">
+            <h3>Chat</h3>
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input">
+              <input type="text" id="message-input" placeholder="Type a message...">
+              <button id="emoji-btn" class="btn-emoji"><i class="far fa-smile"></i></button>
+              <button id="send-btn" class="btn">Send</button>
+            </div>
+            <div id="emoji-picker" class="emoji-picker"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Video Call Container -->
+      <div id="call-container">
+        <video id="remote-video" autoplay></video>
+        <video id="local-video" autoplay muted></video>
+      </div>
+      
+      <div class="invite-section">
+        <p>Invite others to join:</p>
+        <div class="invite-link">
+          <input type="text" id="invite-link" readonly>
+          <button id="copy-link-btn" class="btn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <p>Room PIN: <span id="display-room-pin"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

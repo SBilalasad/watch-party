@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "peerjs": "^1.5.5",
+    "simple-peer": "^9.11.1",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0"
+  }
+}
